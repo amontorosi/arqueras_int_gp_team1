@@ -1,0 +1,31 @@
+#version: '3' esta línea ya no es necesaria
+services:
+  db-mysql:
+    image: mysql:8.0-debian
+    #restart: always
+    #command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./arqueras_db/arqueras_mysql_db:/var/lib/mysql
+    env_file:
+      - .my-docker.mysql.env
+    ports:
+      - 3306:3306
+    networks:
+      - net-arqueras
+  admin-mysql:
+    depends_on:
+      - db-mysql
+    image: phpmyadmin:5.2.1-apache
+    #restart: always
+    ports:
+      - 9090:80
+    environment:
+      PMA_HOST: db-mysql
+    networks:
+      - net-arqueras
+networks:
+  net-arqueras:
+    driver: bridge
+    #external: true  Se usa si la red ya existe.
+
+#volumes:
