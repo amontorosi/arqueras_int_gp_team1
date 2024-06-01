@@ -6,6 +6,8 @@ services:
     #command: --default-authentication-plugin=mysql_native_password
     volumes:
       - ./arqueras_db/arqueras_mysql_db:/var/lib/mysql
+    #  - ./arqueras_db/arqueras_schema.sql:/docker-entrypoint-initdb.d/1.sql
+    #  - ./arqueras_db/arqueras_insert_basic_data.sql:/docker-entrypoint-initdb.d/2.sql
     env_file:
       - .my-docker.mysql.env
     ports:
@@ -23,9 +25,27 @@ services:
       PMA_HOST: db-mysql
     networks:
       - net-arqueras
+  dev-node:
+    depends_on:
+      - db-mysql
+    image: node:20.14.0-alpine3.20
+    #restart: always
+    volumes:
+      # The project arquerasAppNode already exists in this volume
+      - ./arqueras_node/arquerasAppNode:/usr/src/app
+    working_dir: /usr/src/app
+    # Installing required packages and starting the application with nodemon.
+    # The modifier -g installs globally --> nodemon & express-generator
+    # The rest in the context of the app --> express & mysql2
+    command: 
+      sh -c "npm install -g nodemon && npm install express --save && npm install -g express-generator && npm install mysql2 && nodemon" &&  
+      sh -c "npm install" ## Install project dependencies in the working directory.
+    ports:
+      - "3000:3000"
+    networks:
+      - net-arqueras
 networks:
   net-arqueras:
     driver: bridge
     #external: true  Se usa si la red ya existe.
-
 #volumes:

@@ -4,6 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// Test db
+//var db = require('./db');
+
+// Routes
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -38,4 +42,15 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+
 module.exports = app;
+
+/* db.testDBQuery((err, results) => {
+  if (err) {
+    // Maneja el error
+    console.error('Error al realizar la consulta:', err);
+    return;
+  }
+  // Haz algo con los resultados si es necesario
+  console.log('Resultado de la consulta:', results);
+}); */
