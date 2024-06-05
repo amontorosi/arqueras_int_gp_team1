@@ -346,7 +346,7 @@ public class MainController implements Initializable {
                                 GameOverController controller = fxmlLoader.getController();
 
                                 controller.setMainController(this);
-                                controller.gameOverWin();
+                                controller.gameOverWin(currentGame);
                             } catch (IOException exc) {
                                 System.out.println(exc);
                             }
@@ -371,7 +371,7 @@ public class MainController implements Initializable {
                                 GameOverController controller = fxmlLoader.getController();
 
                                 controller.setMainController(this);
-                                controller.gameOverWin();
+                                controller.gameOverWin(currentGame);
                             } catch (IOException exc) {
                                 System.out.println(exc);
                             }
@@ -396,7 +396,7 @@ public class MainController implements Initializable {
                                 GameOverController controller = fxmlLoader.getController();
 
                                 controller.setMainController(this);
-                                controller.gameOverWin();
+                                controller.gameOverWin(currentGame);
                             } catch (IOException exc) {
                                 System.out.println(exc);
                             }
