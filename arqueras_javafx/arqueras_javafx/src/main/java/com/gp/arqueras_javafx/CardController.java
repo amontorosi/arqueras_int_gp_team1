@@ -754,7 +754,7 @@ public class CardController {
                             alert.showAndWait();
                         } else {
                             for (Territorio territorio : mainController.listaTerritorios) {
-                                if (territorio.getNombre().toLowerCase().contains(txtField.getText())) {
+                                if (territorio.getNombre().toLowerCase().contains(txtField.getText().toLowerCase())) {
                                     finalTerritoriosAAtacar.add(territorio);
                                 }
                             }

@@ -280,6 +280,7 @@ public class MainController implements Initializable {
                     GameOverController controller = fxmlLoader.getController();
 
                     controller.setMainController(this);
+                    imgHorde.removeEventHandler(MouseEvent.MOUSE_CLICKED, hordeHandler);
                     controller.gameOverLose();
                 } catch (IOException e) {
                     System.out.println(e);
