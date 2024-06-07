@@ -89,24 +89,14 @@ public class GameOverController {
         System.out.println("Partida ganada");
         //contar los puntos totales ganados
         int totalPoints = 0;
-        if (currentGame.getDifficulty().equalsIgnoreCase("easy")) {
-            totalPoints += 15;
-        } else if (currentGame.getDifficulty().equalsIgnoreCase("normal")) {
-            totalPoints += 25;
-        } else if (currentGame.getDifficulty().equalsIgnoreCase("hard")) {
-            totalPoints += 40;
-        }
-
         for (Territorio terr : mainController.listaTerritorios) {
-            if (terr.isDestruido()) {
-                totalPoints -= 5;
-            } else {
-                totalPoints -= terr.getCantidadOrcos();
+            if (!terr.isDestruido()) {
+                totalPoints+=10;
             }
-            totalPoints += terr.getCantidadGuerreros();
+            totalPoints-=terr.getCantidadOrcos()*3;
         }
 
-        totalPoints += mainController.arqueras.getCantidadFlechas();
+        totalPoints+=mainController.arqueras.getCantidadFlechas();
 
         switch (Game.getLanguage()) {
             case "EN":
