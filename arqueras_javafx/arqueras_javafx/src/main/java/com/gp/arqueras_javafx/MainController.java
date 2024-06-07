@@ -197,8 +197,8 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            HandlerDB handler = new HandlerDB("jdbc:mysql://localhost:3306/arqueras_db", "arqueras", "arqueras");
-            handler.insertScore("test 1", "easy", 50);
+            HandlerDB handler = new HandlerDB("jdbc:mysql://localhost:3306", "root", "toor");
+            handler.runDBCreationScript();
         } catch (Exception exc) {
             System.out.println(exc);
         }
