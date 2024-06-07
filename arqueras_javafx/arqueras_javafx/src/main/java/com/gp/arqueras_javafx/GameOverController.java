@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import org.apache.log4j.BasicConfigurator;
 
 import java.io.File;
 
@@ -116,6 +117,7 @@ public class GameOverController {
         }
         labelPointsDyn.setText(String.valueOf(totalPoints));
         imgIcon.setImage(new Image(new File("src/main/resources/img/victory.png").toURI().toString()));
+        int finalTotalPoints = totalPoints;
         btnExit.setOnAction(e -> {
             if (tfUsername.getText().isEmpty() || tfUsername.getText().isBlank()) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -133,6 +135,12 @@ public class GameOverController {
                 }
                 alert.show();
             } else {
+                try {
+                    HandlerDB handler = new HandlerDB("jdbc:mysql://localhost:3306/arqueras_db", "arqueras", "arqueras");
+                    handler.insertScore(tfUsername.getText(), currentGame.getDifficulty(), finalTotalPoints);
+                } catch (Exception exc) {
+                    System.out.println(exc);
+                }
                 Platform.exit();
             }
         });
@@ -156,6 +164,12 @@ public class GameOverController {
                 }
                 alert.show();
             } else {
+                try {
+                    HandlerDB handler = new HandlerDB("jdbc:mysql://localhost:3306/arqueras_db", "arqueras", "arqueras");
+                    handler.insertScore(tfUsername.getText(), currentGame.getDifficulty(), finalTotalPoints);
+                } catch (Exception exc) {
+                    System.out.println(exc);
+                }
                 Platform.exit();
             }
         });
