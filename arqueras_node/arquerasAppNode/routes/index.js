@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
-var {Control} = require("../Control");
+var { Control } = require("../Control");
 
 const controlador = new Control();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  controlador.testDBQuery((results) => {
+router.get('/', function (req, res, next) {
+  controlador.scoreQuery((results) => {
     /*if (err) {
       // Maneja el error
       console.error('Error al realizar la consulta:', err);
@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
     });
   });
   //res.render('index', { title: 'Prueba' });
-  
+
 });
 
 module.exports = router;
