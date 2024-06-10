@@ -163,6 +163,7 @@ public class GameOverController {
                 try {
                     HandlerDB handler = new HandlerDB("jdbc:mysql://localhost:3306/arqueras_db", "arqueras", "arqueras");
                     handler.insertScore(tfUsername.getText(), currentGame.getDifficulty(), finalTotalPoints);
+                    System.out.println("Datos almacenados: " + tfUsername.getText() + ", " + currentGame.getDifficulty() + ", " + finalTotalPoints);
                 } catch (Exception exc) {
                     System.out.println(exc);
                 }
