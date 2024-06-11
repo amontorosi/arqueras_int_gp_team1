@@ -1,0 +1,28 @@
+#version: '3' esta línea ya no es necesaria
+services:
+  db-mysql-arqueras:
+    image: mysql-arqueras:1.0
+    volumes:
+      - arqueras_db_vol:/var/lib/mysql
+    env_file:
+      - .my-docker.mysql.env
+    ports:
+      - 3306:3306
+    networks:
+      - net-arqueras
+  web-node-arqueras:
+    depends_on:
+      - db-mysql-arqueras
+    image: node-arqueras:1.0
+    volumes:
+      - arqueras_web_vol:/usr/src/app
+    ports:
+      - "3000:3000"
+    networks:
+      - net-arqueras-prod
+networks:
+  net-arqueras-prod:
+    driver: bridge
+volumes:
+  arqueras_db_vol:
+  arqueras_web_vol:
