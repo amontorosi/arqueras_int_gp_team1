@@ -9,7 +9,7 @@ const connection = mysql.createConnection({
 });
 
 function testDBQuery(callback) {
-    connection.query("SELECT * FROM table1", (err, results, fields) => {
+    connection.query("SELECT * FROM scores", (err, results, fields) => {
         if (err) {
             console.error("Error al ejecutar la consulta:", err.stack);
             callback(err, null);
