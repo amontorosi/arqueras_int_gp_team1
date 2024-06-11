@@ -1,34 +1,111 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Ranking Arqueras de Nand</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <!--<link rel="stylesheet" href="https://bootswatch.com/5/united/bootstrap.min.css">-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1>Ranking Arqueras de Nand</h1>
-    <table class="table table-striped text-center" id="scoreTable">
-        <thead>
+
+<head>
+  <title>Ranking Arqueras de Nand</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <!--<link rel="stylesheet" href="https://bootswatch.com/5/united/bootstrap.min.css">-->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h1>Ranking Arqueras de Nand</h1>
+  <table class="table table-striped text-center" id="scoreTable">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Puntuación</th>
+        <th scope="col">Dificultad</th>
+        <th scope="col">Fecha</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if(datos.length> 0){ %>
+        <% datos.forEach((item)=> { %>
           <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Puntuación</th>
-            <th scope="col">Dificultad</th>
-            <th scope="col">Fecha</th>
+            <td scope="row" class="bold">
+              <%= item.name %>
+            </td>
+            <td>
+              <%= item.score %>
+            </td>
+            <td>
+              <%= helper.formatDiff(item.difficulty) %>
+            </td>
+            <td>
+              <%= helper.formatDate(item.date) %>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          <% datos.forEach((item) => { %>
+          <% })} else { %>
             <tr>
-              <th scope="row"><%= item.name %></th>
-              <td><%= item.score %></td>
-              <td><%= item.difficulty %></td>
-              <td><%= item.date %></td>
+              <td colspan="4">No hay datos</td>
             </tr>
-          <% }); %>
-        </tbody>
-      </table>
-  </body>
+            <%}%>
+    </tbody>
+  </table>
+  <script>
+    //Función sacada de W3Schools
+    function sortTable(n) {
+      var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+      table = document.getElementById("scoreTable");
+      switching = true;
+      // Set the sorting direction to ascending:
+      dir = "asc";
+      /* Make a loop that will continue until
+      no switching has been done: */
+      while (switching) {
+        // Start by saying: no switching is done:
+        switching = false;
+        rows = table.rows;
+        /* Loop through all table rows (except the
+        first, which contains table headers): */
+        for (i = 1; i < (rows.length - 1); i++) {
+          // Start by saying there should be no switching:
+          shouldSwitch = false;
+          /* Get the two elements you want to compare,
+          one from current row and one from the next: */
+          x = rows[i].getElementsByTagName("TD")[n];
+          y = rows[i + 1].getElementsByTagName("TD")[n];
+          /* Check if the two rows should switch place,
+          based on the direction, asc or desc: */
+          if (dir == "asc") {
+            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+              // If so, mark as a switch and break the loop:
+              shouldSwitch = true;
+              break;
+            }
+          } else if (dir == "desc") {
+            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+              // If so, mark as a switch and break the loop:
+              shouldSwitch = true;
+              break;
+            }
+          }
+        }
+        if (shouldSwitch) {
+          /* If a switch has been marked, make the switch
+          and mark that a switch has been done: */
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+          // Each time a switch is done, increase this count by 1:
+          switchcount++;
+        } else {
+          /* If no switching has been done AND the direction is "asc",
+          set the direction to "desc" and run the while loop again. */
+          if (switchcount == 0 && dir == "asc") {
+            dir = "desc";
+            switching = true;
+          }
+        }
+      }
+    }
+
+    document.getElementById("scoreTable").querySelectorAll(`th`).forEach((th, position) => {
+      th.addEventListener(`click`, evt => sortTable(position));
+    });
+  </script>
+</body>
+
 </html>
