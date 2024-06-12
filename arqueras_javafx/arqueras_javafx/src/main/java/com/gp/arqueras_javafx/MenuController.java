@@ -94,7 +94,7 @@ public class MenuController implements Initializable {
             Scene dialogScene = new Scene(fxmlLoader.load(), 468, 368);
             dialog.setScene(dialogScene);
             dialog.setResizable(false);
-            dialog.getIcons().add(new Image(new File("src/main/resources/img/archers_of_nand_icon.png").toURI().toString()));
+            dialog.getIcons().add(new Image(getClass().getResourceAsStream("/img/archers_of_nand_icon.png")));
 
             dialog.show();
 

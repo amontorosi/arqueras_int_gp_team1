@@ -150,7 +150,7 @@ public class DiffController implements Initializable {
             newWindow.setScene(scene);
             newWindow.setResizable(false);
             newWindow.show();
-            newWindow.getIcons().add(new Image(new File("src/main/resources/img/archers_of_nand_icon.png").toURI().toString()));
+            newWindow.getIcons().add(new Image(getClass().getResourceAsStream("/img/archers_of_nand_icon.png")));
             window.close();
             ((Stage) btnStart.getScene().getWindow()).close();
 

@@ -72,7 +72,7 @@ public class GameOverController {
         }
         labelPoints.setVisible(false);
         labelPointsDyn.setVisible(false);
-        imgIcon.setImage(new Image(new File("src/main/resources/img/defeat.png").toURI().toString()));
+        imgIcon.setImage(new Image(getClass().getResourceAsStream("/img/defeat.png")));
         btnExit.setOnAction(e -> Platform.exit());
 
         //si se cierra la ventana, también cuenta como que se sale del juego
@@ -112,7 +112,7 @@ public class GameOverController {
                 break;
         }
         labelPointsDyn.setText(String.valueOf(totalPoints));
-        imgIcon.setImage(new Image(new File("src/main/resources/img/victory.png").toURI().toString()));
+        imgIcon.setImage(new Image(getClass().getResourceAsStream("/img/victory.png")));
         int finalTotalPoints = totalPoints;
         btnExit.setOnAction(e -> {
             if (tfUsername.getText().isEmpty() || tfUsername.getText().isBlank()) {

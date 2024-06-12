@@ -30,7 +30,10 @@ import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 /**
@@ -198,6 +201,7 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             HandlerDB handler = new HandlerDB("jdbc:mysql://localhost:3306", "root", "toor");
+            System.out.println("Creando base de datos...");
             handler.runDBCreationScript();
         } catch (Exception exc) {
             System.out.println(exc);
@@ -281,7 +285,7 @@ public class MainController implements Initializable {
                     Scene dialogScene = new Scene(fxmlLoader.load(), 468, 368);
                     dialog.setScene(dialogScene);
                     dialog.setResizable(false);
-                    dialog.getIcons().add(new Image(new File("src/main/resources/img/archers_of_nand_icon.png").toURI().toString()));
+                    dialog.getIcons().add(new Image(getClass().getResourceAsStream("/img/archers_of_nand_icon.png")));
                     dialog.show();
 
                     GameOverController controller = fxmlLoader.getController();
@@ -348,7 +352,7 @@ public class MainController implements Initializable {
                                 Scene dialogScene = new Scene(fxmlLoader.load(), 468, 368);
                                 dialog.setScene(dialogScene);
                                 dialog.setResizable(false);
-                                dialog.getIcons().add(new Image(new File("src/main/resources/img/archers_of_nand_icon.png").toURI().toString()));
+                                dialog.getIcons().add(new Image(getClass().getResourceAsStream("/img/archers_of_nand_icon.png")));
                                 dialog.show();
 
                                 GameOverController controller = fxmlLoader.getController();
@@ -373,7 +377,7 @@ public class MainController implements Initializable {
                                 Scene dialogScene = new Scene(fxmlLoader.load(), 468, 368);
                                 dialog.setScene(dialogScene);
                                 dialog.setResizable(false);
-                                dialog.getIcons().add(new Image(new File("src/main/resources/img/archers_of_nand_icon.png").toURI().toString()));
+                                dialog.getIcons().add(new Image(getClass().getResourceAsStream("/img/archers_of_nand_icon.png")));
                                 dialog.show();
 
                                 GameOverController controller = fxmlLoader.getController();
@@ -398,7 +402,7 @@ public class MainController implements Initializable {
                                 Scene dialogScene = new Scene(fxmlLoader.load(), 468, 368);
                                 dialog.setScene(dialogScene);
                                 dialog.setResizable(false);
-                                dialog.getIcons().add(new Image(new File("src/main/resources/img/archers_of_nand_icon.png").toURI().toString()));
+                                dialog.getIcons().add(new Image(getClass().getResourceAsStream("/img/archers_of_nand_icon.png")));
                                 dialog.show();
 
                                 GameOverController controller = fxmlLoader.getController();
@@ -627,25 +631,25 @@ public class MainController implements Initializable {
                         }
                         switch (terr.getNombre()) {
                             case "Klifdalholm":
-                                imgKlifdalholm.setImage(new Image(new File("src/main/resources/img/klifdalholm_dest.png").toURI().toString()));
+                                imgKlifdalholm.setImage(new Image(getClass().getResourceAsStream("/img/klifdalholm_dest.png")));
                                 break;
                             case "Klifstenvik":
-                                imgKlifstenvik.setImage(new Image(new File("src/main/resources/img/klifstenvik_dest.png").toURI().toString()));
+                                imgKlifstenvik.setImage(new Image(getClass().getResourceAsStream("/img/klifstenvik_dest.png")));
                                 break;
                             case "Beknesvik":
-                                imgBeknesvik.setImage(new Image(new File("src/main/resources/img/beknesvik_dest.png").toURI().toString()));
+                                imgBeknesvik.setImage(new Image(getClass().getResourceAsStream("/img/beknesvik_dest.png")));
                                 break;
                             case "Aenesholm":
-                                imgAenesholm.setImage(new Image(new File("src/main/resources/img/aenesholm_dest.png").toURI().toString()));
+                                imgAenesholm.setImage(new Image(getClass().getResourceAsStream("/img/aenesholm_dest.png")));
                                 break;
                             case "Aestensand":
-                                imgAestensand.setImage(new Image(new File("src/main/resources/img/aestensand_dest.png").toURI().toString()));
+                                imgAestensand.setImage(new Image(getClass().getResourceAsStream("/img/aestensand_dest.png")));
                                 break;
                             case "Bekdalsand":
-                                imgBekdalsand.setImage(new Image(new File("src/main/resources/img/bekdalsand_dest.png").toURI().toString()));
+                                imgBekdalsand.setImage(new Image(getClass().getResourceAsStream("/img/bekdalsand_dest.png")));
                                 break;
                             case "Bekstenholm":
-                                imgBekstenholm.setImage(new Image(new File("src/main/resources/img/bekstenholm_dest.png").toURI().toString()));
+                                imgBekstenholm.setImage(new Image(getClass().getResourceAsStream("/img/bekstenholm_dest.png")));
                                 break;
                         }
                     }
@@ -722,7 +726,7 @@ public class MainController implements Initializable {
             txtRoundDyn.setText(currentGame.getCurrentRound() + "/15");
         }
 
-        imgArchers.setImage(new Image(new File("src/main/resources/img/archers.png").toURI().toString()));
+        imgArchers.setImage(new Image(getClass().getResourceAsStream("/img/archers.png")));
         fullDeck = false;
         switch (Game.getLanguage()) {
             case "EN":
@@ -744,25 +748,25 @@ public class MainController implements Initializable {
 
                     switch (cartaSacada.getTipo()) {
                         case "AND":
-                            cardsView.get(cuatroCartasActuales.size() - 1).setImage(new Image(new File("src/main/resources/img/card_and.png").toURI().toString()));
+                            cardsView.get(cuatroCartasActuales.size() - 1).setImage(new Image(getClass().getResourceAsStream("/img/card_and.png")));
                             break;
                         case "OR":
-                            cardsView.get(cuatroCartasActuales.size() - 1).setImage(new Image(new File("src/main/resources/img/card_or.png").toURI().toString()));
+                            cardsView.get(cuatroCartasActuales.size() - 1).setImage(new Image(getClass().getResourceAsStream("/img/card_or.png")));
                             break;
                         case "XOR":
-                            cardsView.get(cuatroCartasActuales.size() - 1).setImage(new Image(new File("src/main/resources/img/card_xor.png").toURI().toString()));
+                            cardsView.get(cuatroCartasActuales.size() - 1).setImage(new Image(getClass().getResourceAsStream("/img/card_xor.png")));
                             break;
                         case "COUNT":
-                            cardsView.get(cuatroCartasActuales.size() - 1).setImage(new Image(new File("src/main/resources/img/card_count.png").toURI().toString()));
+                            cardsView.get(cuatroCartasActuales.size() - 1).setImage(new Image(getClass().getResourceAsStream("/img/card_count.png")));
                             break;
                         case "Bengala":
-                            cardsView.get(cuatroCartasActuales.size() - 1).setImage(new Image(new File("src/main/resources/img/card_flare.png").toURI().toString()));
+                            cardsView.get(cuatroCartasActuales.size() - 1).setImage(new Image(getClass().getResourceAsStream("/img/card_flare.png")));
                             break;
                         case "LIKE":
-                            cardsView.get(cuatroCartasActuales.size() - 1).setImage(new Image(new File("src/main/resources/img/card_like.png").toURI().toString()));
+                            cardsView.get(cuatroCartasActuales.size() - 1).setImage(new Image(getClass().getResourceAsStream("/img/card_like.png")));
                             break;
                         case "NOT":
-                            cardsView.get(cuatroCartasActuales.size() - 1).setImage(new Image(new File("src/main/resources/img/card_not.png").toURI().toString()));
+                            cardsView.get(cuatroCartasActuales.size() - 1).setImage(new Image(getClass().getResourceAsStream("/img/card_not.png")));
                             break;
                     }
                 } else {
@@ -774,25 +778,25 @@ public class MainController implements Initializable {
 
                             switch (cartaSacada.getTipo()) {
                                 case "AND":
-                                    cardsView.get(cardsView.indexOf(img)).setImage(new Image(new File("src/main/resources/img/card_and.png").toURI().toString()));
+                                    cardsView.get(cardsView.indexOf(img)).setImage(new Image(getClass().getResourceAsStream("/img/card_and.png")));
                                     break;
                                 case "OR":
-                                    cardsView.get(cardsView.indexOf(img)).setImage(new Image(new File("src/main/resources/img/card_or.png").toURI().toString()));
+                                    cardsView.get(cardsView.indexOf(img)).setImage(new Image(getClass().getResourceAsStream("/img/card_or.png")));
                                     break;
                                 case "XOR":
-                                    cardsView.get(cardsView.indexOf(img)).setImage(new Image(new File("src/main/resources/img/card_xor.png").toURI().toString()));
+                                    cardsView.get(cardsView.indexOf(img)).setImage(new Image(getClass().getResourceAsStream("/img/card_xor.png")));
                                     break;
                                 case "COUNT":
-                                    cardsView.get(cardsView.indexOf(img)).setImage(new Image(new File("src/main/resources/img/card_count.png").toURI().toString()));
+                                    cardsView.get(cardsView.indexOf(img)).setImage(new Image(getClass().getResourceAsStream("/img/card_count.png")));
                                     break;
                                 case "Bengala":
-                                    cardsView.get(cardsView.indexOf(img)).setImage(new Image(new File("src/main/resources/img/card_flare.png").toURI().toString()));
+                                    cardsView.get(cardsView.indexOf(img)).setImage(new Image(getClass().getResourceAsStream("/img/card_flare.png")));
                                     break;
                                 case "LIKE":
-                                    cardsView.get(cardsView.indexOf(img)).setImage(new Image(new File("src/main/resources/img/card_like.png").toURI().toString()));
+                                    cardsView.get(cardsView.indexOf(img)).setImage(new Image(getClass().getResourceAsStream("/img/card_like.png")));
                                     break;
                                 case "NOT":
-                                    cardsView.get(cardsView.indexOf(img)).setImage(new Image(new File("src/main/resources/img/card_not.png").toURI().toString()));
+                                    cardsView.get(cardsView.indexOf(img)).setImage(new Image(getClass().getResourceAsStream("/img/card_not.png")));
                                     break;
                             }
                             break;
@@ -878,13 +882,13 @@ public class MainController implements Initializable {
 
             switch (hordaSacada.getNumeroOrcos()) {
                 case 3:
-                    imgHorde.setImage(new Image(new File("src/main/resources/img/card_horde_3.png").toURI().toString()));
+                    imgHorde.setImage(new Image(getClass().getResourceAsStream("/img/card_horde_3.png")));
                     break;
                 case 4:
-                    imgHorde.setImage(new Image(new File("src/main/resources/img/card_horde_4.png").toURI().toString()));
+                    imgHorde.setImage(new Image(getClass().getResourceAsStream("/img/card_horde_4.png")));
                     break;
                 case 5:
-                    imgHorde.setImage(new Image(new File("src/main/resources/img/card_horde_5.png").toURI().toString()));
+                    imgHorde.setImage(new Image(getClass().getResourceAsStream("/img/card_horde_5.png")));
                     break;
             }
             imgHorde.setVisible(true);
@@ -938,21 +942,21 @@ public class MainController implements Initializable {
                 boolean moneda3 = setMonedas[2].lanzarMoneda();
 
                 if (moneda1) {
-                    coinsView[0].setImage(new Image(new File("src/main/resources/img/coin_green.png").toURI().toString()));
+                    coinsView[0].setImage(new Image(getClass().getResourceAsStream("/img/coin_green.png")));
                 } else {
-                    coinsView[0].setImage(new Image(new File("src/main/resources/img/coin_reverse.png").toURI().toString()));
+                    coinsView[0].setImage(new Image(getClass().getResourceAsStream("/img/coin_reverse.png")));
                 }
 
                 if (moneda2) {
-                    coinsView[1].setImage(new Image(new File("src/main/resources/img/coin_red.png").toURI().toString()));
+                    coinsView[1].setImage(new Image(getClass().getResourceAsStream("/img/coin_red.png")));
                 } else {
-                    coinsView[1].setImage(new Image(new File("src/main/resources/img/coin_reverse.png").toURI().toString()));
+                    coinsView[1].setImage(new Image(getClass().getResourceAsStream("/img/coin_reverse.png")));
                 }
 
                 if (moneda3) {
-                    coinsView[2].setImage(new Image(new File("src/main/resources/img/coin_blue.png").toURI().toString()));
+                    coinsView[2].setImage(new Image(getClass().getResourceAsStream("/img/coin_blue.png")));
                 } else {
-                    coinsView[2].setImage(new Image(new File("src/main/resources/img/coin_reverse.png").toURI().toString()));
+                    coinsView[2].setImage(new Image(getClass().getResourceAsStream("/img/coin_reverse.png")));
                 }
 
                 if (setMonedas[0].isCaraOCruz() && !setMonedas[1].isCaraOCruz() && !setMonedas[2].isCaraOCruz()) {
@@ -977,7 +981,7 @@ public class MainController implements Initializable {
                     //0, 1, 2 true
                     carta.horda(bekstenholm, this);
                 } else {
-                    imgArchers.setImage(new Image(new File("src/main/resources/img/archers_reverse.png").toURI().toString()));
+                    imgArchers.setImage(new Image(getClass().getResourceAsStream("/img/archers_reverse.png")));
                     //ninguno true, las arqueras huyen y pierden flechas (solo la primera vez que pasa)
                     if (vecesNingunaCara == 0) {
                         if (arqueras.getCantidadFlechas() <= 0) {
@@ -1080,7 +1084,7 @@ public class MainController implements Initializable {
                     Scene dialogScene = new Scene(fxmlLoader.load(), 468, 368);
                     dialog.setScene(dialogScene);
                     dialog.setResizable(false);
-                    dialog.getIcons().add(new Image(new File("src/main/resources/img/archers_of_nand_icon.png").toURI().toString()));
+                    dialog.getIcons().add(new Image(getClass().getResourceAsStream("/img/archers_of_nand_icon.png")));
                     dialog.show();
 
                     CardController controller = fxmlLoader.getController();
@@ -1102,17 +1106,8 @@ public class MainController implements Initializable {
     /**
      * Método que abre el manual de ayuda en una ventana del navegador externa al pulsar el botón de ayuda del tablero
      */
-    public void openHelp() {
-        File file = null;
-        switch (Game.getLanguage()) {
-            case "EN":
-                file = new File("src/main/resources/manuals/spanish.pdf"); //no encuentro el manual en inglés, es posible que ni exista
-                break;
-            case "ES":
-                file = new File("src/main/resources/manuals/spanish.pdf");
-                break;
-        }
-        MainApp.applicationInstance.getHostServices().showDocument(String.valueOf(file.toURI()));
+    public void openHelp() throws IOException {
+        MainApp.applicationInstance.getHostServices().showDocument("https://drive.google.com/file/d/1cif9moSOB28gLqQbAGQo5F4dE-MGXtMK/view?usp=sharing");
     }
 
     /**

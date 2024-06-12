@@ -49,9 +49,10 @@ public class HandlerDB {
      * Ejecuta el script de creación de la base de datos y la tabla de puntuaciones
      */
     public void runDBCreationScript() throws Exception {
-        Connection conn = (Connection) DriverManager.getConnection(url, usuario, password);
+        Connection conn = DriverManager.getConnection(url, usuario, password);
         ScriptRunner sr = new ScriptRunner(conn);
-        Reader reader = new BufferedReader(new FileReader("../../arqueras_db/arqueras_schema.sql"));
+        Reader reader = new BufferedReader(new FileReader("../arqueras_db/arqueras_schema.sql"));
+        sr.setLogWriter(null);
         sr.runScript(reader);
         reader.close();
         conn.close();
@@ -64,7 +65,7 @@ public class HandlerDB {
      * @param score La puntuación final tras haber ganado
      */
     public void insertScore(String playerName, String difficulty, int score) throws SQLException {
-        Connection conexion = (Connection) DriverManager.getConnection(url, usuario, password);
+        Connection conexion = DriverManager.getConnection(url, usuario, password);
 
         PreparedStatement pst = conexion.prepareStatement("insert into scores values (?,?, now(), ?)");
         pst.setString(1, playerName);
@@ -82,7 +83,7 @@ public class HandlerDB {
      * @throws SQLException
      */
     public void deleteScore(String playerName, String date) throws SQLException {
-        Connection conexion = (Connection) DriverManager.getConnection(url, usuario, password);
+        Connection conexion = DriverManager.getConnection(url, usuario, password);
         Statement stmt = conexion.createStatement();
         String sql = "delete from scores where name='" + playerName + "' and date='" + date + "'";
         stmt.executeUpdate(sql);

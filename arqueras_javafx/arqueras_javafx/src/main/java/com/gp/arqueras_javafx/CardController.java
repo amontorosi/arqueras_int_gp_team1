@@ -357,13 +357,13 @@ public class CardController {
                             break;
                     }
 
-                    coinGreen = new ImageView(new Image(new File("src/main/resources/img/coin_green.png").toURI().toString()));
+                    coinGreen = new ImageView(new Image(getClass().getResourceAsStream("/img/coin_green.png")));
                     coinGreen.setFitHeight(100);
                     coinGreen.setFitWidth(100);
-                    coinRed = new ImageView(new Image(new File("src/main/resources/img/coin_red.png").toURI().toString()));
+                    coinRed = new ImageView(new Image(getClass().getResourceAsStream("/img/coin_red.png")));
                     coinRed.setFitHeight(100);
                     coinRed.setFitWidth(100);
-                    coinBlue = new ImageView(new Image(new File("src/main/resources/img/coin_blue.png").toURI().toString()));
+                    coinBlue = new ImageView(new Image(getClass().getResourceAsStream("/img/coin_blue.png")));
                     coinBlue.setFitHeight(100);
                     coinBlue.setFitWidth(100);
 
@@ -450,13 +450,13 @@ public class CardController {
                             break;
                     }
 
-                    coinGreen = new ImageView(new Image(new File("src/main/resources/img/coin_green.png").toURI().toString()));
+                    coinGreen = new ImageView(new Image(getClass().getResourceAsStream("/img/coin_green.png")));
                     coinGreen.setFitHeight(100);
                     coinGreen.setFitWidth(100);
-                    coinRed = new ImageView(new Image(new File("src/main/resources/img/coin_red.png").toURI().toString()));
+                    coinRed = new ImageView(new Image(getClass().getResourceAsStream("/img/coin_red.png")));
                     coinRed.setFitHeight(100);
                     coinRed.setFitWidth(100);
-                    coinBlue = new ImageView(new Image(new File("src/main/resources/img/coin_blue.png").toURI().toString()));
+                    coinBlue = new ImageView(new Image(getClass().getResourceAsStream("/img/coin_blue.png")));
                     coinBlue.setFitHeight(100);
                     coinBlue.setFitWidth(100);
 
@@ -585,13 +585,13 @@ public class CardController {
                             break;
                     }
 
-                    coinGreen = new ImageView(new Image(new File("src/main/resources/img/coin_green.png").toURI().toString()));
+                    coinGreen = new ImageView(new Image(getClass().getResourceAsStream("/img/coin_green.png")));
                     coinGreen.setFitHeight(100);
                     coinGreen.setFitWidth(100);
-                    coinRed = new ImageView(new Image(new File("src/main/resources/img/coin_red.png").toURI().toString()));
+                    coinRed = new ImageView(new Image(getClass().getResourceAsStream("/img/coin_red.png")));
                     coinRed.setFitHeight(100);
                     coinRed.setFitWidth(100);
-                    coinBlue = new ImageView(new Image(new File("src/main/resources/img/coin_blue.png").toURI().toString()));
+                    coinBlue = new ImageView(new Image(getClass().getResourceAsStream("/img/coin_blue.png")));
                     coinBlue.setFitHeight(100);
                     coinBlue.setFitWidth(100);
 
@@ -809,13 +809,13 @@ public class CardController {
                             break;
                     }
 
-                    coinGreen = new ImageView(new Image(new File("src/main/resources/img/coin_green.png").toURI().toString()));
+                    coinGreen = new ImageView(new Image(getClass().getResourceAsStream("/img/coin_green.png")));
                     coinGreen.setFitHeight(100);
                     coinGreen.setFitWidth(100);
-                    coinRed = new ImageView(new Image(new File("src/main/resources/img/coin_red.png").toURI().toString()));
+                    coinRed = new ImageView(new Image(getClass().getResourceAsStream("/img/coin_red.png")));
                     coinRed.setFitHeight(100);
                     coinRed.setFitWidth(100);
-                    coinBlue = new ImageView(new Image(new File("src/main/resources/img/coin_blue.png").toURI().toString()));
+                    coinBlue = new ImageView(new Image(getClass().getResourceAsStream("/img/coin_blue.png")));
                     coinBlue.setFitHeight(100);
                     coinBlue.setFitWidth(100);
 

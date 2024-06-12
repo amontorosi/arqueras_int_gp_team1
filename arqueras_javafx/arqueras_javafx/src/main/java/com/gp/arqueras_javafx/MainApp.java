@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * El "public static void main" de la aplicación, el punto de partida
+ * El punto de la partida de la aplicación, la clase que lanza la ventana del menú principal
  *
  * @author Manuel Valdepeñas
  * @version 3.0 05/05/2023
@@ -21,6 +21,11 @@ public class MainApp extends Application {
      */
     public static MainApp applicationInstance;
 
+    /**
+     * Método que lanza el menú principal
+     *
+     * @param stage La ventana donde se va a insertar la escena cargada del FXML
+     */
     @Override
     public void start(Stage stage) throws IOException {
         MainApp.applicationInstance = this;
@@ -29,11 +34,7 @@ public class MainApp extends Application {
         stage.setTitle("¡Bienvenido a Arqueras of Nand!");
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.getIcons().add(new Image(new File("src/main/resources/img/archers_of_nand_icon.png").toURI().toString()));
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/img/archers_of_nand_icon.png")));
         stage.show();
-    }
-
-    public static void main(String[] args) {
-        launch();
     }
 }
