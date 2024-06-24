@@ -23,6 +23,8 @@ services:
 networks:
   net-arqueras-prod:
     driver: bridge
+  net-arqueras:
+    driver: bridge
 volumes:
   arqueras_db_vol:
   arqueras_web_vol:

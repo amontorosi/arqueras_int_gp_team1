@@ -1,6 +1,6 @@
 function formatDate(d) {
     var meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
-    return d.getDate() + " de " + meses[d.getMonth() - 1] + " de " + d.getFullYear() + " (" + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + ")";
+    return d.getDate() + " de " + meses[d.getMonth()] + " de " + d.getFullYear() + " (" + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + ")";
 }
 
 function formatDiff(d) {

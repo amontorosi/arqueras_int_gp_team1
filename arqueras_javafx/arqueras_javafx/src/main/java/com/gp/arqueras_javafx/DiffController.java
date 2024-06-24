@@ -44,7 +44,7 @@ public class DiffController implements Initializable {
             case "EN":
                 labelDiff.setText("Choose a Difficulty Level");
                 radioEasy.setText("Easy");
-                radioNormal.setText("Normal");
+                radioNormal.setText("Medium");
                 radioHard.setText("Hard");
                 diffDesc.setText("");
                 btnStart.setText("Let's Go!");
