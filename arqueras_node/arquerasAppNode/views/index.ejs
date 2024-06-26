@@ -11,14 +11,26 @@
 </head>
 
 <body>
-  <h1>Ranking Arqueras de Nand</h1>
+  <nav class="navbar">
+    <div class="container">
+      <ul class="navbar-list navbar-left">
+      </ul>
+      <div class="navbar-right">
+        <select data-i18n-switcher class="locale-switcher">
+          <option value="es">Español</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+    </div>
+  </nav>
+  <h1 i18n-key="pageHeader">Ranking Arqueras de Nand</h1>
   <table class="table table-striped text-center" id="scoreTable">
     <thead>
       <tr>
-        <th scope="col">Nombre</th>
-        <th scope="col">Puntuación</th>
-        <th scope="col">Dificultad</th>
-        <th scope="col">Fecha</th>
+        <th scope="col" i18n-key="headName">Nombre</th>
+        <th scope="col" i18n-key="headScore">Puntuación</th>
+        <th scope="col" i18n-key="headDiff">Dificultad</th>
+        <th scope="col" i18n-key="headDate">Fecha</th>
       </tr>
     </thead>
     <tbody>
@@ -31,21 +43,165 @@
             <td>
               <%= item.score %>
             </td>
-            <td>
-              <%= helper.formatDiff(item.difficulty) %>
-            </td>
-            <td>
-              <%= helper.formatDate(item.date) %>
-            </td>
+            <td difficultyCell></td>
+            <td dateCell></td>
           </tr>
           <% })} else { %>
             <tr>
-              <td colspan="4">No hay datos</td>
+              <td colspan="4" i18n-key="noData">No hay datos</td>
             </tr>
             <%}%>
     </tbody>
   </table>
   <script>
+    let difficulties = [];
+    let dates = [];
+    const supportedLocales = ["es", "en"];
+
+    "<% datos.forEach((item)=> { %>"
+    difficulties.push("<%= item.difficulty %>");
+    dates.push("<%= item.date %>");
+    "<% }) %>"
+
+    const defaultLocale = navigator.language || navigator.userLanguage;
+    let locale;
+    let translations = {};
+
+    document.addEventListener("DOMContentLoaded", () => {
+      if (defaultLocale.includes("-")) {
+        locale = defaultLocale.split("-")[0];
+      } else {
+        locale = defaultLocale;
+      }
+
+      if (!supportedLocales.includes(locale)) {
+        locale = "en";
+      }
+
+      bindLocaleSwitcher(locale);
+      setLocale(locale);
+    });
+
+    function bindLocaleSwitcher(initialValue) {
+      const switcher = document.querySelector("[data-i18n-switcher]");
+      switcher.value = initialValue;
+      switcher.onchange = (e) => {
+        resetTable();
+        setLocale(e.target.value);
+      };
+    }
+
+    async function setLocale(newLocale) {
+      const newTranslations = await fetchTranslationsFor(newLocale);
+      locale = newLocale;
+      translations = newTranslations;
+      translatePage();
+    }
+
+    async function fetchTranslationsFor(newLocale) {
+      const response = await fetch(`/lang/${newLocale}.json`);
+      return await response.json();
+    }
+
+    function translatePage() {
+      var difficultyCells = document.querySelectorAll("[difficultyCell]");
+      var dateCells = document.querySelectorAll("[dateCell]");
+      document
+        .querySelectorAll("[i18n-key]")
+        .forEach(translateElement);
+
+      for (var i = 0; i < difficultyCells.length; i++) {
+        difficultyCells[i].innerText = formatDiff(difficulties[i]);
+        dateCells[i].innerText = formatDate(dates[i]);
+      }
+    }
+
+    function translateElement(element) {
+      const key = element.getAttribute("i18n-key");
+      const translation = translations[key];
+      element.innerText = translation;
+    }
+
+    function formatDate(date) {
+      const d = new Date(date);
+      var meses, formattedDate;
+      if (locale.includes("es")) {
+        meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+        formattedDate = d.getDate() + " de " + meses[d.getMonth()] + " de " + d.getFullYear() + " (" + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + ")";
+      } else if (locale.includes("en")) {
+        meses = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        formattedDate = meses[d.getMonth()] + " ";
+
+        if (d.getDate() % 10 == 1 && d.getDate() != 11) {
+          formattedDate += d.getDate() + "st ";
+        } else if (d.getDate() % 20 == 1 && d.getDate() != 12) {
+          formattedDate += d.getDate() + "nd ";
+        } else if (d.getDate() % 30 == 1 && d.getDate() != 13) {
+          formattedDate += d.getDate() + "rd ";
+        } else {
+          formattedDate += d.getDate() + "th ";
+        }
+
+        formattedDate += d.getFullYear() + " (" + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + ")";
+      }
+
+      return formattedDate;
+    }
+
+    function formatDiff(d) {
+      var formattedDiff;
+      if (locale.includes("es")) {
+        switch (d) {
+          case "easy":
+            formattedDiff = "Fácil";
+            break;
+          case "normal":
+            formattedDiff = "Normal";
+            break;
+          case "hard":
+            formattedDiff = "Difícil";
+            break;
+        }
+      } else if (locale.includes("en")) {
+        switch (d) {
+          case "easy":
+            formattedDiff = "Easy";
+            break;
+          case "normal":
+            formattedDiff = "Medium";
+            break;
+          case "hard":
+            formattedDiff = "Hard";
+            break;
+        }
+      }
+      return formattedDiff;
+    }
+
+    function resetTable() {
+      var table, rows, switching, i, x, y, shouldSwitch, switchcount = 0;
+      table = document.getElementById("scoreTable");
+      switching = true;
+      while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < (rows.length - 1); i++) {
+          shouldSwitch = false;
+          x = rows[i].getElementsByTagName("TD")[1];
+          y = rows[i + 1].getElementsByTagName("TD")[1];
+          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            shouldSwitch = true;
+            break;
+          }
+        }
+        if (shouldSwitch) {
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+          switchcount++;
+        }
+      }
+    }
+
     //Función sacada de W3Schools
     function sortTable(n) {
       var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
