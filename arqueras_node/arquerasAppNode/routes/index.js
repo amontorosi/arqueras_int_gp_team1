@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var { Control } = require("../Control");
-var scripts = require('../public/js/scripts');
 
 const controlador = new Control();
 
@@ -17,8 +16,7 @@ router.get('/', function (req, res, next) {
     //console.log('Resultado de la consulta:', results);
     res.render("index", {
       //datos: results
-      datos: results,
-      helper: scripts
+      datos: results
     });
   });
   //res.render('index', { title: 'Prueba' });
