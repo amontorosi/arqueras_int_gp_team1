@@ -387,7 +387,7 @@ public class MainController implements Initializable {
                             } catch (IOException exc) {
                                 System.out.println(exc);
                             }
-                        } else if (currentGame.getDifficulty().equalsIgnoreCase("hard") && currentGame.getCurrentRound() == 13) {
+                        } else if (currentGame.getDifficulty().equalsIgnoreCase("hard") && currentGame.getCurrentRound() == 15) {
                             try {
                                 FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("gameover_interface.fxml"));
                                 final Stage dialog = new Stage();
@@ -1106,7 +1106,7 @@ public class MainController implements Initializable {
     /**
      * Método que abre el manual de ayuda en una ventana del navegador externa al pulsar el botón de ayuda del tablero
      */
-    public void openHelp() throws IOException {
+    public void openHelp() {
         MainApp.applicationInstance.getHostServices().showDocument("https://drive.google.com/file/d/1cif9moSOB28gLqQbAGQo5F4dE-MGXtMK/view?usp=sharing");
     }
 
